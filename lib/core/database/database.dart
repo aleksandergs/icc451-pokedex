@@ -39,7 +39,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   static Future<AppDatabase> openAt(String dbPath) async {
-    return AppDatabase(await NativeDatabase.createInBackground(File((dbPath))));
+    return AppDatabase(NativeDatabase.createInBackground(File((dbPath))));
   }
 
   Future<T> writeTransaction<T>(Future<T> Function() action) async {

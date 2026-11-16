@@ -1,4 +1,4 @@
-enum FailureType { noConnection, timeout, serverError, rateLimited, unknown }
+enum FailureType { noConnection, timeout, serverError, responseError, rateLimited, unknown }
 
 class AppFailure implements Exception {
   const AppFailure(this.type, {this.message});
