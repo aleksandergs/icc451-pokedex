@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
-  runApp(const PokedexApp());
+import 'dart:async';
+
+import 'app/app.dart';
+import 'app/providers.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final AppDependencies dependencies = await AppDependencies.create();
+
+  runApp(
+    ProviderScope(
+      overrides: [appDependenciesProvider.overrideWithValue(dependencies)],
+      child: const _Bootstrap(),
+    ),
+  );
 }
 
-class PokedexApp extends StatelessWidget {
-  const PokedexApp({super.key});
+class _Bootstrap extends ConsumerStatefulWidget {
+  const _Bootstrap();
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokedex',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const PokedexPage(title: 'Listado de los pokemons'),
-    );
+  ConsumerState<_Bootstrap> createState() => _BootstrapState();
+}
+
+class _BootstrapState extends ConsumerState<_Bootstrap> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
+      unawaited(ref.read(syncServiceProvider).start());
+    });
   }
-}
-
-class PokedexPage extends StatefulWidget {
-  const PokedexPage({super.key, required this.title});
-
-  final String title;
 
   @override
-  State<PokedexPage> createState() => _PokedexPageState();
-}
-
-class _PokedexPageState extends State<PokedexPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => const PokedexApp();
 }

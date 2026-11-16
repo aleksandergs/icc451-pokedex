@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 
 import '../../../core/database/database.dart';
-import '../../../../core/database/tables.dart';
+import '../../../core/database/tables.dart';
 import '../domain/pokemon.dart';
 import 'pokemon_dto.dart';
 
@@ -23,7 +23,7 @@ class PokemonLocalDataSource {
           'SELECT p.*, (f.pokemon_id IS NOT NULL) AS is_favorite '
           'FROM pokemon p '
           'LEFT JOIN favorite f ON f.pokemon_id = p.id '
-          'ORDER BY p.pokemon_dex ASC '
+          'ORDER BY p.pokedex_number ASC '
           'LIMIT ? OFFSET ?',
           variables: <Variable<Object>>[
             Variable<int>(limit ?? -1),
@@ -62,8 +62,8 @@ class PokemonLocalDataSource {
           return PokemonSummary(
             id: id,
             name: row.read<String>('name'),
-            speciesId: row.read<int>('pokemon_species_id'),
-            pokedexNumber: row.read<int>('pokemon_dex'),
+            speciesId: row.read<int>('species_id'),
+            pokedexNumber: row.read<int>('pokedex_number'),
             generationId: row.readNullable<int>('generation_id') ?? 0,
             generationName: row.readNullable<String>('generation_name') ?? '',
             types: typesByPokemon[id] ?? const <PokeType>[],
