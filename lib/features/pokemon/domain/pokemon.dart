@@ -1,15 +1,16 @@
 /// Entidades del dominio de Pokemon.
 library;
 
-class PokemonType {
-  const PokemonType({required this.id, required this.name});
+// 'PokemonType' hace conflicto con el nombre de la tabla
+class PokeType {
+  const PokeType({required this.id, required this.name});
 
   final int id;
   final String name;
 
   @override
   bool operator ==(Object other) =>
-      other is PokemonType && other.id == id && other.name == name;
+      other is PokeType && other.id == id && other.name == name;
 
   @override
   int get hashCode => Object.hash(id, name);
@@ -33,7 +34,7 @@ class PokemonSummary {
   final int pokedexNumber;
   final int generationId;
   final String generationName;
-  final List<PokemonType> types;
+  final List<PokeType> types;
 
   String get displayName {
     if (name.isEmpty) return name;

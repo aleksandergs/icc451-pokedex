@@ -18,7 +18,7 @@ class PokemonDto {
   final int pokedexNumber;
   final int generationId;
   final String generationName;
-  final List<PokemonType> types;
+  final List<PokeType> types;
 
   /// nodo de la consulta de catalogo (`kCatalogQuery`).
   factory PokemonDto.fromCatalogNode(Map<String, dynamic> node) {
@@ -47,16 +47,16 @@ class PokemonDto {
     types: types,
   );
 
-  static List<PokemonType> parseTypes(dynamic raw) =>
+  static List<PokeType> parseTypes(dynamic raw) =>
       ((raw as List<dynamic>?) ?? const <dynamic>[])
           .map((dynamic entry) {
             final Map<String, dynamic> type = asMap(asMap(entry)['type']);
-            return PokemonType(
+            return PokeType(
               id: asInt(type['id']),
               name: asString(type['name']),
             );
           })
-          .where((PokemonType type) => type.name.isNotEmpty)
+          .where((PokeType type) => type.name.isNotEmpty)
           .toList(growable: false);
 
   static Map<String, dynamic> asMap(dynamic value) =>
