@@ -40,7 +40,7 @@ class PokemonLocalDataSource {
     final List<int> ids = rows
         .map((QueryRow row) => row.read<int>('id'))
         .toList(growable: false);
-    final List<PokemonTypeData> TypeDatas = await (_db.select(
+    final List<PokemonTypeData> typeDatas = await (_db.select(
       _db.pokemonType,
     )..where((PokemonType t) => t.pokemonId.isIn(ids))).get();
 
@@ -50,7 +50,7 @@ class PokemonLocalDataSource {
     };
 
     final Map<int, List<PokeType>> typesByPokemon = <int, List<PokeType>>{};
-    for (final PokemonTypeData row in TypeDatas) {
+    for (final PokemonTypeData row in typeDatas) {
       (typesByPokemon[row.pokemonId] ??= <PokeType>[]).add(
         PokeType(id: row.typeId, name: nameById[row.typeId] ?? ''),
       );
