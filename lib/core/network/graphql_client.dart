@@ -22,9 +22,9 @@ class GraphQlClient {
 
   /// ejecuta una consulta y devuelve el objeto `data` de la respuesta.
   Future<Map<String, dynamic>> query(
-      String document, {
-        Map<String, dynamic>? variables,
-      }) async {
+    String document, {
+    Map<String, dynamic>? variables,
+  }) async {
     final String body = jsonEncode(<String, dynamic>{
       'query': document,
       if (variables != null && variables.isNotEmpty) 'variables': variables,
@@ -34,13 +34,13 @@ class GraphQlClient {
     try {
       response = await _http
           .post(
-        endpoint,
-        headers: const <String, String>{
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: body,
-      )
+            endpoint,
+            headers: const <String, String>{
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: body,
+          )
           .timeout(timeout);
     } on TimeoutException {
       throw const AppFailure(FailureType.timeout);
@@ -60,7 +60,7 @@ class GraphQlClient {
     late final Map<String, dynamic> decoded;
     try {
       decoded =
-      jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
+          jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     } on FormatException catch (error) {
       throw AppFailure(FailureType.responseError, message: error.message);
     }
@@ -70,7 +70,7 @@ class GraphQlClient {
       final String message = errors
           .map(
             (dynamic error) => error is Map ? '${error['message']}' : '$error',
-      )
+          )
           .join(' | ');
       throw AppFailure(FailureType.serverError, message: message);
     }

@@ -11,6 +11,7 @@ query CatalogPage($limit: Int!, $offset: Int!) {
   ) {
     id
     name
+    pokemon_species_id
     pokemontypes(order_by: {slot: asc}) {
       slot
       type { id name }

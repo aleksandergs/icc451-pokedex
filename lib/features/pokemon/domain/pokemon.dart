@@ -20,6 +20,7 @@ class PokemonSummary {
   const PokemonSummary({
     required this.id,
     required this.name,
+    required this.speciesId,
     required this.pokedexNumber,
     required this.generationId,
     required this.generationName,
@@ -28,6 +29,7 @@ class PokemonSummary {
 
   final int id;
   final String name;
+  final int speciesId;
   final int pokedexNumber;
   final int generationId;
   final String generationName;
@@ -35,6 +37,7 @@ class PokemonSummary {
 
   String get displayName {
     if (name.isEmpty) return name;
+
     /// Primera letra en mayuscula
     return '${name[0].toUpperCase()}${name.substring(1)}';
   }
