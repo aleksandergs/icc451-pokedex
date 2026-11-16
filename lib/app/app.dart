@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'localization/strings.dart';
 import 'theme/theme.dart';
 import '../core/widgets/connectivity_indicator.dart';
+import '../features/pokemon/presentation/catalog_page.dart';
 
 /// App principal
 class PokedexApp extends ConsumerWidget {
@@ -35,6 +36,7 @@ class PokedexApp extends ConsumerWidget {
           ],
         );
       },
+      home: const CatalogPage(),
     );
   }
 }
