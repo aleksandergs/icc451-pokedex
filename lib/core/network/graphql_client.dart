@@ -6,10 +6,10 @@ import 'package:http/http.dart' as http;
 
 import '../errors/failure.dart';
 
-const int defaultTimeout = 15;
-
 /// Cliente GraphQL HTTP de lectura
 class GraphQlClient {
+  static const int defaultTimeout = 15;
+
   GraphQlClient({
     required this.endpoint,
     http.Client? httpClient,

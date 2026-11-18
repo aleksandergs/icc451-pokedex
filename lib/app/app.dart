@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'localization/strings.dart';
 import 'theme/theme.dart';
+import 'theme/theme_provider.dart';
 import '../core/widgets/connectivity_indicator.dart';
 import '../features/pokemon/presentation/catalog_page.dart';
 
@@ -13,10 +14,14 @@ class PokedexApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ThemeMode currTheme = ref.watch(themeModeProvider);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appTitle,
       theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: currTheme,
       locale: const Locale('es'),
       supportedLocales: const <Locale>[Locale('es')],
       localizationsDelegates: GlobalMaterialLocalizations.delegates,

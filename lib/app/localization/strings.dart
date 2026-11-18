@@ -20,5 +20,11 @@ abstract final class AppStrings {
   static const String errorLocal = 'No se pudo leer la base de datos local';
   static const String retry = 'Reintentar';
 
+  static const String darkMode = 'Modo Oscuro';
+  static const String lightMode = 'Modo Claro';
+
+  static const String gridView = "Vista de Grid";
+  static const String listView = "Vista de Lista";
+
   static const String imageUnavailable = 'Imagen no disponible';
 }
